@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medify 預約跳轉</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+    <p style="text-align: center; padding: 20px; font-family: Arial, sans-serif;">正在為您跳轉到預約頁面...</p>
+    
+    <script>
+        // 初始化 LIFF
+        liff.init({ liffId: '2008697264-YpNjw9RK' })
+            .then(() => {
+                // 從網址取得參數
+                const urlParams = new URLSearchParams(window.location.search);
+                const subject = urlParams.get('subject') || '10';
+                const doctor = urlParams.get('doctor') || '何宜儒';
+                
+                // 跳轉到掛號系統
+                const targetUrl = `https://netreg.realsun.com.tw/m/3501186495?subject=${subject}&doctor=${encodeURIComponent(doctor)}`;
+                window.location.href = targetUrl;
+            })
+            .catch((err) => {
+                console.error('LIFF 初始化失敗:', err);
+                document.body.innerHTML = '<p style="text-align: center; color: red; font-family: Arial, sans-serif;">載入失敗，請重新整理</p>';
+            });
+    </script>
+</body>
+</html>
