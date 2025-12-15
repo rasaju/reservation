@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>預約系統</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button id="reserveBtn">立即預約</button>
+
+    <script>
+        document.getElementById('reserveBtn').addEventListener('click', function() {
+            // LIFF URL 加上參數
+            const liffUrl = "https://liff.line.me/2008697264-YpNjw9RK";
+            const subject = "10";
+            const doctor = "何宜儒";
+            const fullUrl = liffUrl + "?subject=" + subject + "&doctor=" + encodeURIComponent(doctor);
+            
+            // 開啟 LINE LIFF
+            window.location.href = fullUrl;
+        });
+    </script>
+</body>
+</html>
