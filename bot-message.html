@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medify 一鍵預約</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        h1 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            background-color: #00B900;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #009900;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .info {
+            color: white;
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Medify 智慧預約</h1>
+        <button id="reserveBtn">預約骨科何宜儒醫師</button>
+        <div class="info" id="status"></div>
+    </div>
+    
+    <script>
+        const statusEl = document.getElementById('status');
+        
+        // 初始化 LIFF
+        liff.init({ liffId: '2008697264-YpNjw9RK' })
+            .then(() => {
+                statusEl.textContent = '✓ 準備就緒';
+                
+                document.getElementById('reserveBtn').addEventListener('click', function() {
+                    statusEl.textContent = '正在發送...';
+                    
+                    liff.sendMessages([{
+                        type: 'text',
+                        text: '我要預約骨科何宜儒醫師'
+                    }])
+                    .then(() => {
+                        statusEl.textContent = '✓ 預約訊息已送出！';
+                        setTimeout(() => {
+                            liff.closeWindow();
+                        }, 1000);
+                    })
+                    .catch((err) => {
+                        console.error('發送失敗:', err);
+                        statusEl.textContent = '✗ 發送失敗，請再試一次';
+                    });
+                });
+            })
+            .catch((err) => {
+                console.error('LIFF 初始化失敗:', err);
+                statusEl.textContent = '✗ 載入失敗，請重新整理';
+            });
+    </script>
+</body>
+</html>
