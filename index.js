@@ -6,6 +6,14 @@ const config = {
   channelSecret: process.env.LINE_CHANNEL_SECRET,
 };
 
+// 除錯：印出環境變數狀態
+console.log('=== 環境變數檢查 ===');
+console.log('ACCESS_TOKEN exists:', !!process.env.LINE_CHANNEL_ACCESS_TOKEN);
+console.log('ACCESS_TOKEN length:', process.env.LINE_CHANNEL_ACCESS_TOKEN?.length);
+console.log('SECRET exists:', !!process.env.LINE_CHANNEL_SECRET);
+console.log('SECRET length:', process.env.LINE_CHANNEL_SECRET?.length);
+console.log('Config:', { ...config, channelAccessToken: config.channelAccessToken ? '[EXISTS]' : '[MISSING]', channelSecret: config.channelSecret ? '[EXISTS]' : '[MISSING]' });
+
 const app = express();
 app.use(express.json());
 
