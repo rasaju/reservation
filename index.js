@@ -207,7 +207,6 @@ return client.replyMessage(event.replyToken, {
     text: '若要預約，請輸入「我要預約」。',
   });
 }
-}
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
