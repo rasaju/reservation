@@ -184,8 +184,7 @@ return client.replyMessage(event.replyToken, {
           flex: 0
         }
       }
-    });    });
-  }
+  }); 
 
   // 超簡化 Demo 後續對話
   if (text === '今天' || text === '明天') {
